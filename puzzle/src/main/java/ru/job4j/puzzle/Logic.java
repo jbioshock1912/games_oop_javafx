@@ -39,12 +39,12 @@ public class Logic {
         return rst;
     }
 
-    public boolean isFree(Cell ... cells) {
+    public boolean isFree(Cell... cells) {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-               result = false;
-               break;
+                result = false;
+                break;
             }
         }
         return result;
@@ -70,7 +70,43 @@ public class Logic {
 
     public boolean isWin() {
         int[][] table = this.convert();
+        return this.isWinHorizont(table) || this.isWinVertical(table);
+    }
+
+    public boolean isWinVertical(int[][] table) {
         boolean result = false;
+        for (int i = 0; i < table.length; i++) {
+            int countVertical = 0;
+            for (int j = 0; j < table.length; j++) {
+
+                if (table[j][i] == 1) {
+                    countVertical++;
+                    if (countVertical == table.length) {
+                        result = true;
+                        System.out.println("выигрыш");
+                        return result;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    public boolean isWinHorizont(int[][] table) {
+        boolean result = false;
+        for (int i = 0; i < table.length; i++) {
+            int countHorizont = 0;
+            for (int j = 0; j < table.length; j++) {
+                if (table[i][j] == 1) {
+                    countHorizont++;
+                    if (countHorizont == table.length) {
+                        result = true;
+                        System.out.println("выигрыш");
+                        return result;
+                    }
+                }
+            }
+        }
         return result;
     }
 
